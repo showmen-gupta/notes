@@ -1,4 +1,6 @@
-export const bucket = new sst.aws.Bucket("Uploads");
+export const bucket = new sst.aws.Bucket("Uploads", {
+  cors: true,
+});
 export const secret = new sst.Secret("StripeSecretKey");
 
 // Create the DynamoDB table
