@@ -5,7 +5,7 @@ import LoaderButton from "../components/LoaderButton.tsx";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../lib/contextLib";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { onError } from "../lib/errorLib.ts";
 import { useFormFields } from "../lib/hooksLib";
 
@@ -61,6 +61,7 @@ const [fields, handleFieldChange] = useFormFields({
               onChange={handleFieldChange}
             />
           </Form.Group>
+          <Link to="/login/reset">Forgot password?</Link>
           <LoaderButton
                 size="lg"
                 type="submit"
