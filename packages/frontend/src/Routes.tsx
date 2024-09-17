@@ -6,6 +6,7 @@ import Signup from "./containers/Signup.tsx";
 import ResetPassword from "./containers/ResetPassword.tsx";
 import NewNote from "./containers/NewNote.tsx";
 import Notes from "./containers/Notes.tsx";
+import Settings from "./containers/Settings.tsx";
 
 export default function Links() {
   return (
@@ -17,6 +18,7 @@ export default function Links() {
       <Route path="/login/reset" element={<ResetPassword />} />
       <Route path="/notes/new" element={<NewNote />} />
       <Route path="/notes/:id" element={<Notes />} />
+      <Route path="/settings" element={<Settings />} />
     </Routes>
   );
 }

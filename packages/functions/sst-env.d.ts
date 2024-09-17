@@ -21,6 +21,10 @@ declare module "sst" {
       "name": string
       "type": "sst.aws.Dynamo"
     }
+    "StripePublishableKey": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "StripeSecretKey": {
       "type": "sst.sst.Secret"
       "value": string

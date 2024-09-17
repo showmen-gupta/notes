@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { bucket } from "./storage";
+import { bucket, publishableSecret } from "./storage";
 import { userPool, identityPool, userPoolClient } from "./auth";
 
 const region = aws.getRegionOutput().name;
@@ -17,5 +17,6 @@ export const frontend = new sst.aws.StaticSite("Frontend", {
     VITE_USER_POOL_ID: userPool.id,
     VITE_IDENTITY_POOL_ID: identityPool.id,
     VITE_USER_POOL_CLIENT_ID: userPoolClient.id,
+    VITE_STRIPE_PUBLISHABLE_KEY: publishableSecret.name
   },
 });
