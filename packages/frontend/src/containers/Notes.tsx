@@ -97,9 +97,10 @@ export default function Notes() {
   function deleteNote() {
     return API.del("notes", `/notes/${id}`, {});
   }
+  
   async function removeFile(fileKey: string) {
     try {
-        const result = await Storage.remove(fileKey);
+        const result = await Storage.vault.remove(fileKey);
         console.log('File removed successfully:', result);
     } catch (error) {
         console.error('Error removing file:', error);
@@ -121,8 +122,8 @@ export default function Notes() {
 
     try {
         await deleteNote();
-        if(note?.attachmentURL){
-            await removeFile(note.attachmentURL);
+        if(note?.attachment){
+            await removeFile(note.attachment);
         }
         nav("/");
       } catch (e) {
