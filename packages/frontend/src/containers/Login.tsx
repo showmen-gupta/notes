@@ -5,7 +5,7 @@ import LoaderButton from "../components/LoaderButton.tsx";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../lib/contextLib";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { onError } from "../lib/errorLib.ts";
 import { useFormFields } from "../lib/hooksLib";
 
@@ -17,7 +17,6 @@ const [fields, handleFieldChange] = useFormFields({
 
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
-  const nav = useNavigate();
 
 
   function validateForm() {
@@ -31,7 +30,6 @@ const [fields, handleFieldChange] = useFormFields({
     try {
         await Auth.signIn(fields.email, fields.password);
         userHasAuthenticated(true);
-        nav("/");
       } catch (error) {
         onError(error);
         setIsLoading(false);
