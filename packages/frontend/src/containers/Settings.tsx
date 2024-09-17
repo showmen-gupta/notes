@@ -9,7 +9,7 @@ import { BillingFormType } from "../types/billingFormType";
 import { Elements } from "@stripe/react-stripe-js";
 import { BillingForm } from "../components/BillingForm";
 
-const stripePromise = loadStripe(config.STRIPE_KEY);
+const stripePromise = loadStripe(config.STRIPE_KEY.toString());
 
 export default function Settings() {    
   const nav = useNavigate();
