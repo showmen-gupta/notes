@@ -67,7 +67,7 @@ export default function Home() {
     return (
       <div className="lander">
         <h1>Scratch</h1>
-        <p className="text-muted">Take your valuable notes</p>
+        <p className="text-muted">Register your valuable notes</p>
       </div>
     );
   }
