@@ -10,17 +10,19 @@ export const frontend = new sst.aws.StaticSite("Frontend", {
     output: "dist",
     command: "npm run build",
   },
-  // domain: $app.stage === "production" 
-  // ? {
-  //   name: "notes.showmen.wslabs.no",
-  //   redirects: ["www.notes.showmen.wslabs.no"],
-  // } 
-  // : $app.stage === "dev" 
-  // ? {
-  //   name: `${$app.stage}.notes.showmen.wslabs.no` ,
-  //   redirects: [`www.${$app.stage}.notes.showmen.wslabs.no`],
-  // }  
-  // : undefined,
+  domain: $app.stage === "production" 
+  ? {
+    name: "notes.showmenapps.site",
+    alias: "www.notes.showmenapps.site",
+    redirects: ["www.notes.showmenapps.site"],
+  } 
+  : $app.stage === "dev" 
+  ? {
+    name: "dev.notes.showmenapps.site",
+    alias: [`www.${$app.stage}.notes.showmenapps.site`],
+    redirects: [`www.${$app.stage}.notes.showmenapps.site`],
+  }  
+  : undefined,
   environment: {
     VITE_REGION: region,
     VITE_API_URL: api.url,

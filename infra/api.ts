@@ -3,11 +3,11 @@ import { table, secret, publishableSecret } from "./storage";
 // Create the API
 export const api = new sst.aws.ApiGatewayV2("Api", {
   cors: true,
-  // domain: $app.stage === "production" 
-  // ? 'notesapi.showmen.wslabs.no' 
-  // : $app.stage === "dev" 
-  // ? `notesapi-${$app.stage}.showmen.wslabs.no` 
-  // : undefined,
+  domain: $app.stage === "production" 
+  ? 'api.notes.showmenapps.site' 
+  : $app.stage === "dev" 
+  ? `api.notes.${$app.stage}.showmenapps.site` 
+  : undefined,
 
   transform: {
     route: {
