@@ -1,0 +1,72 @@
+name: Deploy
+on:
+    push:
+        branches:
+            - production
+    pull_request:
+        branches:
+            - production
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        
+        - name: Set up Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18'
+        
+        - name: Install dependencies
+          run: npm install           
+        
+        - name: Pre-deployment cleanup (Optional)
+          env: 
+            SST_ENV: production
+          run: npx sst refresh --stage production
+
+        - name: Deploy SST app to production
+          env: 
+            SST_ENV: production
+          run: npx sst deploy --stage production
+        
+        - name: Notify Success
+          run: echo "Deployment Successful!"
+          
+
+name: Deploy
+on:
+    push:
+        branches:
+          - dev
+    pull_request:
+        branches:
+          - dev
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+        
+        - name: Set up Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18'
+        
+        - name: Install dependencies
+          run: npm install           
+        
+        - name: Pre-deployment cleanup (Optional)
+          env: 
+            SST_ENV: dev
+          run: npx sst refresh --stage dev
+
+        - name: Deploy SST app to dev
+          env: 
+            SST_ENV: dev
+          run: npx sst deploy --stage dev
+        
+        - name: Notify Success
+          run: echo "Deployment Successful!"            

@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
-import {
-  Form,
-  FormGroup,
-  FormControl,
-} from "react-bootstrap";
+import { Form, FormGroup, FormControl } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./ResetPassword.css";
 import { useFormFields } from "../lib/hooksLib";
@@ -109,7 +105,7 @@ export default function ResetPassword() {
           </Form.Text>
         </FormGroup>
         <hr />
-        <FormGroup  controlId="password">
+        <FormGroup controlId="password">
           <Form.Label>New Password</Form.Label>
           <FormControl
             type="password"
@@ -141,7 +137,7 @@ export default function ResetPassword() {
   function renderSuccessMessage() {
     return (
       <div className="success">
-       <FaEnvelope />
+        <FaEnvelope />
         <p>Your password has been reset.</p>
         <p>
           <Link to="/login">
