@@ -5,9 +5,9 @@ export const secret = new sst.Secret("StripeSecretKey");
 export const publishableSecret = new sst.Secret("StripePublishableKey");
 // Create the DynamoDB table
 export const table = new sst.aws.Dynamo("Notes", {
-    fields: {
-      userId: "string",
-      noteId: "string",
-    },
-    primaryIndex: { hashKey: "userId", rangeKey: "noteId" },
-  });
+  fields: {
+    userId: "string",
+    noteId: "string",
+  },
+  primaryIndex: { hashKey: "userId", rangeKey: "noteId" },
+});
