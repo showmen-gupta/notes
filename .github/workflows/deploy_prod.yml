@@ -31,7 +31,6 @@ jobs:
       - name: Pre-deployment cleanup (Optional)
         env:
           SST_ENV: production
-        run: npm ci
         run: npx sst refresh --stage production
 
       - name: Deploy SST app to production
