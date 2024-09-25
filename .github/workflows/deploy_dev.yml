@@ -22,7 +22,7 @@ jobs:
       run: npm install
     
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -38,6 +38,9 @@ jobs:
         SST_ENV: dev
       run: npx sst deploy --stage dev
 
+    - name: Set success message
+      run: echo "SUCCESS_MESSAGE=Deployment Successful!" >> $GITHUB_ENV
+    
     - name: Notify Success
       if: ${{ success() }}
-      run: echo "Deployment Successful!"
+      run: echo ${{ env.SUCCESS_MESSAGE }}
