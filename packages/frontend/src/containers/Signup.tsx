@@ -44,12 +44,16 @@ export default function Signup() {
       });
       setNewUser(newUser);
     } catch (e: any) {
-      if (e.name === 'UsernameExistsException') {
+      if (e.name === "UsernameExistsException") {
         try {
           await Auth.resendSignUp(fields.email);
-          onError("An account with this email already exists. Verification code resent.");
+          onError(
+            "An account with this email already exists. Verification code resent."
+          );
         } catch (resendError: any) {
-          onError("Error in resending the verification code: " + resendError.message);
+          onError(
+            "Error in resending the verification code: " + resendError.message
+          );
         }
       } else {
         onError(e.message || "Error during sign-up");
@@ -58,7 +62,6 @@ export default function Signup() {
       setIsLoading(false);
     }
   }
-  
 
   async function handleConfirmationSubmit(
     event: React.FormEvent<HTMLFormElement>
@@ -66,14 +69,14 @@ export default function Signup() {
     event.preventDefault();
     setIsLoading(true);
     try {
-        await Auth.confirmSignUp(fields.email, fields.confirmationCode);
-        await Auth.signIn(fields.email, fields.password);
-        userHasAuthenticated(true);
-        nav("/");
-      } catch (e) {
-        onError(e);
-        setIsLoading(false);
-      }
+      await Auth.confirmSignUp(fields.email, fields.confirmationCode);
+      await Auth.signIn(fields.email, fields.password);
+      userHasAuthenticated(true);
+      nav("/");
+    } catch (e) {
+      onError(e);
+      setIsLoading(false);
+    }
   }
 
   function renderConfirmationForm() {
