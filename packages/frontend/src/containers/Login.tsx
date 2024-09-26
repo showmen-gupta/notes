@@ -10,30 +10,29 @@ import { onError } from "../lib/errorLib.ts";
 import { useFormFields } from "../lib/hooksLib";
 
 export default function Login() {
-const [fields, handleFieldChange] = useFormFields({
+  const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
-    });
+  });
 
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
 
-
   function validateForm() {
     return fields.email.length > 0 && fields.password.length > 0;
-}
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
 
     try {
-        await Auth.signIn(fields.email, fields.password);
-        userHasAuthenticated(true);
-      } catch (error) {
-        onError(error);
-        setIsLoading(false);
-      }
+      await Auth.signIn(fields.email, fields.password);
+      userHasAuthenticated(true);
+    } catch (error) {
+      onError(error);
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -61,13 +60,13 @@ const [fields, handleFieldChange] = useFormFields({
           </Form.Group>
           <Link to="/login/reset">Forgot password?</Link>
           <LoaderButton
-                size="lg"
-                type="submit"
-                isLoading={isLoading}
-                disabled={!validateForm()}
-                >
-                Login
-        </LoaderButton>
+            size="lg"
+            type="submit"
+            isLoading={isLoading}
+            disabled={!validateForm()}
+          >
+            Login
+          </LoaderButton>
         </Stack>
       </Form>
     </div>

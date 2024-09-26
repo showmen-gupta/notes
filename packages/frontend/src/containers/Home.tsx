@@ -9,7 +9,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { BsPencilSquare } from "react-icons/bs";
 
 export default function Home() {
-  const [notes, setNotes] = useState<Array<NoteType>>([]);  const { isAuthenticated } = useAppContext();
+  const [notes, setNotes] = useState<Array<NoteType>>([]);
+  const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -17,20 +18,20 @@ export default function Home() {
       if (!isAuthenticated) {
         return;
       }
-  
+
       try {
         const notes = await loadNotes();
         setNotes(notes);
       } catch (e) {
         onError(e);
       }
-  
+
       setIsLoading(false);
     }
-  
+
     onLoad();
   }, [isAuthenticated]);
-  
+
   function loadNotes() {
     return API.get("notes", "/notes", {});
   }
@@ -38,7 +39,7 @@ export default function Home() {
   function formatDate(str: undefined | string) {
     return !str ? "" : new Date(str).toLocaleString();
   }
-  
+
   function renderNotesList(notes: NoteType[]) {
     return (
       <>
