@@ -1,7 +1,7 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./NewNote.css";
@@ -27,13 +27,13 @@ export default function NewNote() {
   }
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if ( event.currentTarget.files === null ) return
+    if (event.currentTarget.files === null) return;
     file.current = event.currentTarget.files[0];
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-  
+
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
       alert(
         `Please pick a file smaller than ${
@@ -42,14 +42,14 @@ export default function NewNote() {
       );
       return;
     }
-  
+
     setIsLoading(true);
-  
+
     try {
       const attachment = file.current
         ? await s3Upload(file.current)
         : undefined;
-  
+
       await createNote({ content, attachment });
       nav("/");
     } catch (e) {

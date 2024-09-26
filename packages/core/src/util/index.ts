@@ -4,7 +4,7 @@ export namespace Util {
   export function handler(
     lambda: (evt: APIGatewayProxyEvent, context: Context) => Promise<string>
   ) {
-    return async function(event: APIGatewayProxyEvent, context: Context) {
+    return async function (event: APIGatewayProxyEvent, context: Context) {
       let body: string, statusCode: number;
 
       try {
