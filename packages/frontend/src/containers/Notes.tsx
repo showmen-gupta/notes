@@ -10,7 +10,7 @@ import "./Notes.css";
 import { s3Upload } from "../lib/awsLib";
 
 export default function Notes() {
-  const file = useRef<null | File>(null)
+  const file = useRef<null | File>(null);
   const { id } = useParams();
   const nav = useNavigate();
   const [note, setNote] = useState<null | NoteType>(null);
@@ -27,7 +27,7 @@ export default function Notes() {
       try {
         const note = await loadNote();
         const { content, attachment } = note;
-        
+
         if (attachment) {
           note.attachmentURL = await Storage.vault.get(attachment);
         }
@@ -44,11 +44,11 @@ export default function Notes() {
   function validateForm() {
     return content.length > 0;
   }
-  
+
   function formatFilename(str: string) {
     return str.replace(/^\w+-/, "");
   }
-  
+
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.currentTarget.files === null) return;
     file.current = event.currentTarget.files[0];
@@ -59,12 +59,12 @@ export default function Notes() {
       body: note,
     });
   }
-  
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     let attachment;
-  
+
     event.preventDefault();
-  
+
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
       alert(
         `Please pick a file smaller than ${
@@ -73,63 +73,63 @@ export default function Notes() {
       );
       return;
     }
-  
+
     setIsLoading(true);
 
     try {
-        if (file.current) {
-          attachment = await s3Upload(file.current);
-        } else if (note && note.attachment) {
-          attachment = note.attachment;
-        }
-    
-        await saveNote({
-          content: content,
-          attachment: attachment,
-        });
-        nav("/");
-      } catch (e) {
-        onError(e);
-        setIsLoading(false);
+      if (file.current) {
+        attachment = await s3Upload(file.current);
+      } else if (note && note.attachment) {
+        attachment = note.attachment;
       }
+
+      await saveNote({
+        content: content,
+        attachment: attachment,
+      });
+      nav("/");
+    } catch (e) {
+      onError(e);
+      setIsLoading(false);
+    }
   }
 
   function deleteNote() {
     return API.del("notes", `/notes/${id}`, {});
   }
-  
+
   async function removeFile(fileKey: string) {
     try {
-        const result = await Storage.vault.remove(fileKey);
-        console.log('File removed successfully:', result);
+      const result = await Storage.vault.remove(fileKey);
+      console.log("File removed successfully:", result);
     } catch (error) {
-        console.error('Error removing file:', error);
+      console.error("Error removing file:", error);
     }
   }
 
   async function handleDelete(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-  
+
     const confirmed = window.confirm(
       "Are you sure you want to delete this note?"
     );
-  
+
     if (!confirmed) {
       return;
     }
-  
+
     setIsDeleting(true);
 
     try {
-        await deleteNote();
-        if(note?.attachment){
-            await removeFile(note.attachment);
-        }
-        nav("/");
-      } catch (e) {
-        onError(e);
-        setIsDeleting(false);
+      await deleteNote();
+      if (note?.attachment) {
+        await removeFile(note.attachment);
       }
+      nav("/");
+    } catch (e) {
+      onError(e);
+      setIsDeleting(false);
+    }
   }
 
   return (
@@ -184,4 +184,3 @@ export default function Notes() {
     </div>
   );
 }
-

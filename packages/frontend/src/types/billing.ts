@@ -1,4 +1,4 @@
 export interface BillingType {
-    storage: string;
-    source?: string;
-  }
+  storage: string;
+  source?: string;
+}

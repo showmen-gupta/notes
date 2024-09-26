@@ -11,7 +11,7 @@ import { BillingForm } from "../components/BillingForm";
 
 const stripePromise = loadStripe(config.STRIPE_KEY.toString());
 
-export default function Settings() {    
+export default function Settings() {
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,15 +29,15 @@ export default function Settings() {
       onError(info.error);
       return;
     }
-  
+
     setIsLoading(true);
-  
+
     try {
       await billUser({
         storage,
         source: info.token?.id,
       });
-  
+
       alert("Your card has been charged successfully!");
       nav("/");
     } catch (e) {
@@ -45,7 +45,7 @@ export default function Settings() {
       setIsLoading(false);
     }
   };
-  
+
   return (
     <div className="Settings">
       <Elements

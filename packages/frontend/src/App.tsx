@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     onLoad();
   }, []);
-  
+
   async function onLoad() {
     try {
       await Auth.currentSession();
@@ -48,11 +48,11 @@ function App() {
             <Nav activeKey={window.location.pathname}>
               {isAuthenticated ? (
                 <>
-                <LinkContainer to="/settings">
-                  <Nav.Link>Settings</Nav.Link>
-                </LinkContainer>
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-              </>
+                  <LinkContainer to="/settings">
+                    <Nav.Link>Settings</Nav.Link>
+                  </LinkContainer>
+                  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                </>
               ) : (
                 <>
                   <LinkContainer to="/signup">

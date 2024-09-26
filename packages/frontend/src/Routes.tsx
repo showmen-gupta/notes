@@ -32,39 +32,39 @@ export default function Links() {
           </UnauthenticatedRoute>
         }
       />
-        <Route
-          path="/login/reset"
-          element={
-            <UnauthenticatedRoute>
-              <ResetPassword />
-            </UnauthenticatedRoute>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <AuthenticatedRoute>
-              <Settings />
-            </AuthenticatedRoute>
-          }
-        />
-        <Route
-          path="/notes/new"
-          element={
-            <AuthenticatedRoute>
-              <NewNote />
-            </AuthenticatedRoute>
-          }
-        />
+      <Route
+        path="/login/reset"
+        element={
+          <UnauthenticatedRoute>
+            <ResetPassword />
+          </UnauthenticatedRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <AuthenticatedRoute>
+            <Settings />
+          </AuthenticatedRoute>
+        }
+      />
+      <Route
+        path="/notes/new"
+        element={
+          <AuthenticatedRoute>
+            <NewNote />
+          </AuthenticatedRoute>
+        }
+      />
 
-        <Route
-          path="/notes/:id"
-          element={
-            <AuthenticatedRoute>
-              <Notes />
-            </AuthenticatedRoute>
-          }
-/>
+      <Route
+        path="/notes/:id"
+        element={
+          <AuthenticatedRoute>
+            <Notes />
+          </AuthenticatedRoute>
+        }
+      />
     </Routes>
   );
 }
